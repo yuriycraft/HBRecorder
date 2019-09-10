@@ -34,6 +34,8 @@
 }
 
 @property (strong, nonatomic) SCRecorderToolsView *focusView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightButtonConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthButtonConstraint;
 
 @end
 
@@ -238,6 +240,8 @@
 }
 - (void) handleStopButtonTapped:(id)sender {
     [_recorder pause:^{
+        self.heightButtonConstraint.constant = 70.f;
+        self.widthButtonConstraint.constant = 70.f;
         [self saveAndShowSession:_recorder.session];
     }];
 }
@@ -402,7 +406,11 @@
         CMTime suggestedMaxSegmentDuration = CMTimeMake(_maxSegmentDuration, 1);
         if (CMTIME_IS_VALID(suggestedMaxSegmentDuration)) {
             if (CMTIME_COMPARE_INLINE(recorder.session.currentSegmentDuration, >=, suggestedMaxSegmentDuration)) {
-                [_recorder pause];
+                            [_recorder pause:^{
+                                self.heightButtonConstraint.constant = 70.f;
+                                self.widthButtonConstraint.constant = 70.f;
+                    [self saveAndShowSession:_recorder.session];
+                }];
                 [self.recBtn setImage:self.recStartImage forState:UIControlStateNormal];
             }
         }
@@ -414,8 +422,14 @@
     if (touchDetector.state == UIGestureRecognizerStateBegan) {
         _ghostImageView.hidden = YES;
         [_recorder record];
+        self.heightButtonConstraint.constant = 120.f;
+        self.widthButtonConstraint.constant = 120.f;
     } else if (touchDetector.state == UIGestureRecognizerStateEnded) {
-        [_recorder pause];
+                    [_recorder pause:^{
+                        self.heightButtonConstraint.constant = 70.f;
+                        self.widthButtonConstraint.constant = 70.f;
+            [self saveAndShowSession:_recorder.session];
+        }];
     }
 }
 
@@ -497,17 +511,71 @@
                      forState:UIControlStateNormal];
         
          [_recorder record];
-        
+        self.heightButtonConstraint.constant = 120.f;
+        self.widthButtonConstraint.constant = 120.f;
     }
     // REC STOP
     else {
     
-        [_recorder pause];
+                    [_recorder pause:^{
+                        self.heightButtonConstraint.constant = 70.f;
+                        self.widthButtonConstraint.constant = 70.f;
+            [self saveAndShowSession:_recorder.session];
+        }];
         // change UI
         [self.recBtn setImage:self.recStartImage
                      forState:UIControlStateNormal];
     }
 
+}
+
+- (IBAction)shutterButtonActionStart:(id)sender {
+    if (!hasOrientaionLocked) {
+          _recorder.autoSetVideoOrientation = NO;
+          hasOrientaionLocked = YES;
+          UIInterfaceOrientation currentOrientation = [UIApplication sharedApplication].statusBarOrientation;
+          [[UIDevice currentDevice] setValue:[NSNumber numberWithInt:currentOrientation] forKey:@"orientation"];
+      }
+      
+      
+      // REC START
+      
+      if (!_recorder.isRecording) {
+
+          // change UI
+          [self.recBtn setImage:self.recStopImage
+                       forState:UIControlStateNormal];
+          
+           [_recorder record];
+          self.heightButtonConstraint.constant = 120.f;
+          self.widthButtonConstraint.constant = 120.f;
+          
+      }
+      // REC STOP
+      else {
+//
+             [_recorder pause:^{
+                 self.heightButtonConstraint.constant = 70.f;
+                 self.widthButtonConstraint.constant = 70.f;
+     [self saveAndShowSession:_recorder.session];
+ }];
+//          // change UI
+          [self.recBtn setImage:self.recStartImage
+                       forState:UIControlStateNormal];
+      }
+
+}
+
+- (IBAction)shutterButtonActionEnd:(id)sender {
+     [_recorder pause:^{
+         self.heightButtonConstraint.constant = 70.f;
+         self.widthButtonConstraint.constant = 70.f;
+          [self saveAndShowSession:_recorder.session];
+      }];
+    
+           // change UI
+           [self.recBtn setImage:self.recStartImage
+                        forState:UIControlStateNormal];
 }
 
 

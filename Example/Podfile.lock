@@ -1,0 +1,23 @@
+PODS:
+  - HBRecorder (1.0.1):
+    - SCRecorder
+  - SCRecorder (2.7.0)
+
+DEPENDENCIES:
+  - HBRecorder (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SCRecorder
+
+EXTERNAL SOURCES:
+  HBRecorder:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  HBRecorder: 0f6030e72f5a71cf029d2ed9f63dfb1ca3cfc697
+  SCRecorder: bbb521dbc222908876ec9cd9156bbc8a893bed44
+
+PODFILE CHECKSUM: c9f7850ab95013ca22019685ce3b02def2a9ca47
+
+COCOAPODS: 1.5.3

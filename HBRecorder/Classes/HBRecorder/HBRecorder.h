@@ -67,5 +67,7 @@
 - (IBAction)capturePhoto:(id)sender;
 - (IBAction)switchGhostMode:(id)sender;
 - (IBAction)shutterButtonTapped:(UIButton *)sender;
+- (IBAction)shutterButtonActionStart:(id)sender;
+- (IBAction)shutterButtonActionEnd:(id)sender;
 
 @end
