@@ -37,7 +37,7 @@
                                             <constraint firstAttribute="width" constant="100" id="4uY-pd-bx7"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <state key="normal" title="Recorder" image="back"/>
+                                        <state key="normal" title=" " image="back"/>
                                         <connections>
                                             <action selector="backPressed:" destination="qPh-SG-s5E" eventType="touchUpInside" id="mWx-LK-0iI"/>
                                             <action selector="backToRecorder:" destination="SVJ-NV-hvC" eventType="touchUpInside" id="Z6h-RN-ltt"/>
@@ -315,7 +315,7 @@
             </objects>
             <point key="canvasLocation" x="1484" y="161"/>
         </scene>
-        <!--Recorder-->
+        <!-- -->
         <scene sceneID="joE-2y-B3d">
             <objects>
                 <viewController storyboardIdentifier="HBRecorder" id="ifV-zS-Wk8" customClass="HBRecorder" sceneMemberID="viewController">
@@ -352,18 +352,11 @@
                                     <constraint firstAttribute="bottom" secondItem="Rhe-eD-JYX" secondAttribute="bottom" id="bFh-cx-ys4"/>
                                 </constraints>
                             </view>
-                            <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ttx-d8-M69" userLabel="TopBar">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ttx-d8-M69" userLabel="TopBar">
                                 <rect key="frame" x="0.0" y="44" width="414" height="62"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="62" id="lC2-oy-EaO"/>
-                                </constraints>
-                            </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QdG-wH-4VT">
-                                <rect key="frame" x="20" y="55" width="374" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXp-XQ-3GR">
-                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="20" y="20" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="4qI-D0-h0E"/>
                                             <constraint firstAttribute="height" constant="40" id="X9h-En-2TR"/>
@@ -376,47 +369,17 @@
                                             <action selector="closeCameraTapped:" destination="ifV-zS-Wk8" eventType="touchUpInside" id="kIh-Ct-JOP"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TIg-Ff-pdc">
-                                        <rect key="frame" x="40" y="0.0" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="vdM-4Z-gcb"/>
-                                        </constraints>
-                                        <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" image="FlashOff"/>
-                                        <state key="highlighted" image="FlashOn"/>
-                                        <connections>
-                                            <action selector="switchFlash:" destination="ifV-zS-Wk8" eventType="touchUpInside" id="oDo-cp-pr2"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qu4-Xg-YPl" userLabel="Time recorded Label">
-                                        <rect key="frame" x="80" y="0.0" width="254" height="40"/>
-                                        <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIw-Eo-jLw" userLabel="Rotate Camera">
-                                        <rect key="frame" x="334" y="0.0" width="40" height="40"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="yyy-N1-RSe"/>
-                                        </constraints>
-                                        <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" image="SwitchCamera">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                    </button>
                                 </subviews>
-                            </stackView>
-                            <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nLA-W0-Ig4" userLabel="DownBar">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="dXp-XQ-3GR" firstAttribute="leading" secondItem="Ttx-d8-M69" secondAttribute="leading" constant="20" id="79M-5X-ilB"/>
+                                    <constraint firstItem="dXp-XQ-3GR" firstAttribute="top" secondItem="Ttx-d8-M69" secondAttribute="top" constant="20" id="QY6-zC-b9A"/>
+                                    <constraint firstAttribute="height" constant="62" id="lC2-oy-EaO"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nLA-W0-Ig4" userLabel="DownBar">
                                 <rect key="frame" x="0.0" y="756" width="414" height="106"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="106" id="H1u-Ho-IDo"/>
                                 </constraints>
@@ -434,7 +397,7 @@
                                             <constraint firstAttribute="width" constant="80" id="Os8-dS-yAy"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <state key="normal" title="Retake">
+                                        <state key="normal">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -449,6 +412,10 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wbF-hj-6rm" userLabel="Record View">
                                         <rect key="frame" x="152" y="0.0" width="70" height="70"/>
                                         <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UIN-S2-a5C" customClass="CircleProgressView">
+                                                <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                                <color key="backgroundColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jne-ZN-4Dp">
                                                 <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                                 <state key="normal" image="ShutterButtonStart"/>
@@ -463,11 +430,15 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="iWg-ct-2eu" secondAttribute="bottom" id="2sU-bd-xrc"/>
+                                            <constraint firstItem="UIN-S2-a5C" firstAttribute="height" secondItem="iWg-ct-2eu" secondAttribute="height" id="5O7-4m-NwA"/>
+                                            <constraint firstItem="UIN-S2-a5C" firstAttribute="centerY" secondItem="iWg-ct-2eu" secondAttribute="centerY" id="758-zn-sRF"/>
+                                            <constraint firstItem="UIN-S2-a5C" firstAttribute="width" secondItem="iWg-ct-2eu" secondAttribute="width" id="88K-bd-lls"/>
                                             <constraint firstItem="iWg-ct-2eu" firstAttribute="top" secondItem="wbF-hj-6rm" secondAttribute="top" id="LXb-We-xgG"/>
                                             <constraint firstAttribute="height" constant="70" id="YGy-4r-kCN"/>
                                             <constraint firstAttribute="bottom" secondItem="Jne-ZN-4Dp" secondAttribute="bottom" id="Zo1-29-b2B"/>
                                             <constraint firstItem="iWg-ct-2eu" firstAttribute="leading" secondItem="wbF-hj-6rm" secondAttribute="leading" id="cGn-n0-rM4"/>
                                             <constraint firstItem="Jne-ZN-4Dp" firstAttribute="top" secondItem="wbF-hj-6rm" secondAttribute="top" id="dzN-ws-UuV"/>
+                                            <constraint firstItem="UIN-S2-a5C" firstAttribute="centerX" secondItem="iWg-ct-2eu" secondAttribute="centerX" id="ePt-fE-b8k"/>
                                             <constraint firstAttribute="trailing" secondItem="Jne-ZN-4Dp" secondAttribute="trailing" id="gOF-Iq-GXK"/>
                                             <constraint firstAttribute="width" constant="70" id="pqU-MZ-OrN"/>
                                             <constraint firstItem="Jne-ZN-4Dp" firstAttribute="leading" secondItem="wbF-hj-6rm" secondAttribute="leading" id="qdv-u8-OiG"/>
@@ -481,7 +452,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZu-BV-M12">
                                         <rect key="frame" x="258" y="0.0" width="80" height="70"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <state key="normal" title="Done">
+                                        <state key="normal" image="turnCam">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -497,6 +468,7 @@
                                 <constraints>
                                     <constraint firstItem="Tpj-FI-6fH" firstAttribute="width" secondItem="tEI-ay-s2G" secondAttribute="width" id="Cy3-v5-bXv"/>
                                     <constraint firstItem="oZN-hE-SIk" firstAttribute="width" secondItem="tEI-ay-s2G" secondAttribute="width" id="GVf-gF-B2w"/>
+                                    <constraint firstItem="wbF-hj-6rm" firstAttribute="centerX" secondItem="a6c-7x-JGp" secondAttribute="centerX" id="bv5-0V-a3i"/>
                                     <constraint firstItem="Tpj-FI-6fH" firstAttribute="width" secondItem="as1-7x-5Bt" secondAttribute="width" id="e5I-W2-dlw"/>
                                     <constraint firstItem="swU-zd-v64" firstAttribute="width" secondItem="iZu-BV-M12" secondAttribute="width" id="l7h-5w-I08"/>
                                 </constraints>
@@ -504,7 +476,6 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
-                            <constraint firstItem="QdG-wH-4VT" firstAttribute="leading" secondItem="SlW-dr-yok" secondAttribute="leadingMargin" id="6KA-xk-0VL"/>
                             <constraint firstItem="6pS-QS-t0d" firstAttribute="trailing" secondItem="nLA-W0-Ig4" secondAttribute="trailing" id="9YR-U6-UwI"/>
                             <constraint firstItem="Ttx-d8-M69" firstAttribute="top" secondItem="6pS-QS-t0d" secondAttribute="top" id="EIx-1G-CD8"/>
                             <constraint firstItem="6pS-QS-t0d" firstAttribute="trailing" secondItem="bPY-9P-T4c" secondAttribute="trailing" id="EfT-cG-GLb"/>
@@ -512,11 +483,9 @@
                             <constraint firstItem="a6c-7x-JGp" firstAttribute="leading" secondItem="SlW-dr-yok" secondAttribute="leadingMargin" id="XQx-lU-jG6"/>
                             <constraint firstItem="Ttx-d8-M69" firstAttribute="leading" secondItem="6pS-QS-t0d" secondAttribute="leading" id="YT2-uY-3pl"/>
                             <constraint firstItem="a6c-7x-JGp" firstAttribute="centerX" secondItem="nLA-W0-Ig4" secondAttribute="centerX" id="a0d-m7-8GY"/>
-                            <constraint firstItem="QdG-wH-4VT" firstAttribute="centerY" secondItem="Ttx-d8-M69" secondAttribute="centerY" id="dkh-2b-Iut"/>
                             <constraint firstItem="bPY-9P-T4c" firstAttribute="leading" secondItem="6pS-QS-t0d" secondAttribute="leading" id="jkL-u2-apW"/>
                             <constraint firstItem="bPY-9P-T4c" firstAttribute="top" secondItem="6pS-QS-t0d" secondAttribute="top" id="kEX-Jx-k7r"/>
                             <constraint firstItem="6pS-QS-t0d" firstAttribute="bottom" secondItem="bPY-9P-T4c" secondAttribute="bottom" id="kKf-gR-l4m"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="QdG-wH-4VT" secondAttribute="trailing" id="l6X-3m-jsU"/>
                             <constraint firstItem="6pS-QS-t0d" firstAttribute="trailing" secondItem="Ttx-d8-M69" secondAttribute="trailing" id="lpl-YB-1S1"/>
                             <constraint firstItem="a6c-7x-JGp" firstAttribute="centerY" secondItem="nLA-W0-Ig4" secondAttribute="centerY" constant="-10" id="oTx-9O-hqz"/>
                             <constraint firstAttribute="trailingMargin" secondItem="a6c-7x-JGp" secondAttribute="trailing" id="pDl-SC-N1G"/>
@@ -524,20 +493,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6pS-QS-t0d"/>
                     </view>
-                    <navigationItem key="navigationItem" id="iHZ-3l-wt9"/>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" title=" " id="iHZ-3l-wt9"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="circleProgressView" destination="UIN-S2-a5C" id="wrE-q5-hUD"/>
                         <outlet property="downBar" destination="nLA-W0-Ig4" id="CHY-jW-24V"/>
-                        <outlet property="flashModeButton" destination="TIg-Ff-pdc" id="OgK-Je-BgP"/>
                         <outlet property="heightButtonConstraint" destination="YGy-4r-kCN" id="R86-Ha-M2B"/>
                         <outlet property="loadingView" destination="Rhe-eD-JYX" id="JhN-ly-f5j"/>
                         <outlet property="outerImageView" destination="iWg-ct-2eu" id="zO5-H0-eHn"/>
                         <outlet property="previewView" destination="bPY-9P-T4c" id="rOH-72-AOU"/>
                         <outlet property="recBtn" destination="Jne-ZN-4Dp" id="qFV-zS-qug"/>
-                        <outlet property="retakeButton" destination="swU-zd-v64" id="7jS-Dd-bsD"/>
-                        <outlet property="reverseCamera" destination="uIw-Eo-jLw" id="2ic-Eq-8fE"/>
                         <outlet property="stopButton" destination="iZu-BV-M12" id="0vU-Yx-A5t"/>
-                        <outlet property="timeRecordedLabel" destination="qu4-Xg-YPl" id="ipn-0v-rLl"/>
                         <outlet property="widthButtonConstraint" destination="pqU-MZ-OrN" id="6I8-RW-nxz"/>
                         <segue destination="SVJ-NV-hvC" kind="show" identifier="Video" id="mLx-dl-24o"/>
                     </connections>
@@ -549,15 +516,13 @@
     </scenes>
     <resources>
         <image name="Delete" width="25" height="25"/>
-        <image name="FlashOff" width="25" height="25"/>
-        <image name="FlashOn" width="50" height="50"/>
         <image name="ShutterButtonStart" width="50" height="50"/>
-        <image name="SwitchCamera" width="25" height="25"/>
         <image name="add" width="32" height="32"/>
         <image name="back" width="25" height="25"/>
         <image name="outer1" width="66" height="66"/>
         <image name="play" width="50" height="50"/>
         <image name="rotate" width="25" height="25"/>
         <image name="trash" width="25" height="25"/>
+        <image name="turnCam" width="49" height="49"/>
     </resources>
 </document>

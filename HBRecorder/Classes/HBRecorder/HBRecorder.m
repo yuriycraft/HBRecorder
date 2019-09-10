@@ -16,7 +16,7 @@
 #import "SCSessionListViewController.h"
 #import "SCRecordSessionManager.h"
 #import <MobileCoreServices/MobileCoreServices.h>
-
+#import "CircleProgressView.h"
 
 
 #define kVideoPreset AVCaptureSessionPresetHigh
@@ -36,6 +36,7 @@
 @property (strong, nonatomic) SCRecorderToolsView *focusView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightButtonConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthButtonConstraint;
+@property (weak, nonatomic) IBOutlet CircleProgressView *circleProgressView;
 
 @end
 
@@ -63,6 +64,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationController setNavigationBarHidden:YES];
     self.capturePhotoButton.alpha = 0.0;
     
     _ghostImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
@@ -125,10 +127,10 @@
     
     image = [self imageNamed:@"ShutterButtonStop"];
     self.recStopImage = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    
-    [self.recBtn setTintColor:[UIColor colorWithRed:245./255.
-                                              green:51./255.
-                                               blue:51./255.
+
+    [self.recBtn setTintColor:[UIColor colorWithRed:239/255.
+                                              green:31/255.
+                                               blue:147/255.
                                               alpha:1.0]];
     self.outerImage1 = [self imageNamed:@"outer1"];
     self.outerImage2 = [self imageNamed:@"outer2"];
@@ -171,7 +173,18 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+    SCRecordSession *recordSession = _recorder.session;
+
+                     if (recordSession != nil) {
+                         _recorder.session = nil;
+                                                              
+                         if ([[SCRecordSessionManager sharedInstance] isSaved:recordSession]) {
+                             [recordSession endSegmentWithInfo:nil completionHandler:nil];
+                         } else {
+                             [recordSession cancelSession:nil];
+                         }
+                             [self prepareSession];
+                     }
     [_recorder startRunning];
 }
 
@@ -203,9 +216,6 @@
         HBVideoPlayerViewController *videoPlayer = segue.destinationViewController;
         videoPlayer.recordSession = _recordSession;
         videoPlayer.parent = self;
-        
-        
-        
     } else if ([segue.destinationViewController isKindOfClass:[SCImageDisplayerViewController class]]) {
         SCImageDisplayerViewController *imageDisplayer = segue.destinationViewController;
         imageDisplayer.photo = _photo;
@@ -239,11 +249,12 @@
     [self showVideo];
 }
 - (void) handleStopButtonTapped:(id)sender {
-    [_recorder pause:^{
-        self.heightButtonConstraint.constant = 70.f;
-        self.widthButtonConstraint.constant = 70.f;
-        [self saveAndShowSession:_recorder.session];
-    }];
+//    [_recorder pause:^{
+//        self.heightButtonConstraint.constant = 70.f;
+//        self.widthButtonConstraint.constant = 70.f;
+//        [self saveAndShowSession:_recorder.session];
+//    }];
+    [_recorder switchCaptureDevices];
 }
 
 - (void)saveAndShowSession:(SCRecordSession *)recordSession {
@@ -392,6 +403,7 @@
     }
     
     self.timeRecordedLabel.text = [NSString stringWithFormat:@"%.2f sec", CMTimeGetSeconds(currentTime)];
+    [self.circleProgressView setElapsedTime: CMTimeGetSeconds(currentTime)];
 }
 
 - (void)recorder:(SCRecorder *)recorder didAppendVideoSampleBufferInSession:(SCRecordSession *)recordSession {
@@ -541,7 +553,10 @@
       // REC START
       
       if (!_recorder.isRecording) {
-
+       self.circleProgressView.status = NSLocalizedString(@"circle-progress-view.status-not-started", nil);
+         self.circleProgressView.timeLimit = 10.f;
+         self.circleProgressView.elapsedTime = 0;
+         
           // change UI
           [self.recBtn setImage:self.recStopImage
                        forState:UIControlStateNormal];
@@ -549,19 +564,19 @@
            [_recorder record];
           self.heightButtonConstraint.constant = 120.f;
           self.widthButtonConstraint.constant = 120.f;
-          
+          self.circleProgressView.hidden = NO;
       }
       // REC STOP
       else {
 //
-             [_recorder pause:^{
-                 self.heightButtonConstraint.constant = 70.f;
-                 self.widthButtonConstraint.constant = 70.f;
-     [self saveAndShowSession:_recorder.session];
- }];
+//             [_recorder pause:^{
+//                 self.heightButtonConstraint.constant = 70.f;
+//                 self.widthButtonConstraint.constant = 70.f;
+//     [self saveAndShowSession:_recorder.session];
+// }];
 //          // change UI
-          [self.recBtn setImage:self.recStartImage
-                       forState:UIControlStateNormal];
+ //         [self.recBtn setImage:self.recStartImage
+ //                      forState:UIControlStateNormal];
       }
 
 }
@@ -572,7 +587,7 @@
          self.widthButtonConstraint.constant = 70.f;
           [self saveAndShowSession:_recorder.session];
       }];
-    
+     self.circleProgressView.hidden = YES;
            // change UI
            [self.recBtn setImage:self.recStartImage
                         forState:UIControlStateNormal];
