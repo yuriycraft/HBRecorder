@@ -629,8 +629,8 @@
     [self.delegate recorderDidCancel:self];
     
     self.navigationController.navigationBarHidden = NO;
-
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+   // [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

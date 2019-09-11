@@ -202,8 +202,10 @@
             
             int viewsToPop = 2;
             self.navigationController.navigationBarHidden = NO;
-
-            [self.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count - viewsToPop - 1] animated:YES];
+            [self dismissViewControllerAnimated:YES completion:^{
+                
+            }];
+//            [self.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count - viewsToPop - 1] animated:YES];
 
         } else {
             if (!exportSession.cancelled) {
@@ -241,7 +243,8 @@
 
 
 - (IBAction)backToRecorder:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+     [self dismissViewControllerAnimated:YES completion:nil];
+    //[self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)btnSaveTapped:(id)sender {
@@ -250,6 +253,7 @@
     
 }
 - (IBAction)backAction:(id)sender {
-     [self.navigationController popViewControllerAnimated:YES];
+     [self dismissViewControllerAnimated:YES completion:nil];
+    // [self.navigationController popViewControllerAnimated:YES];
 }
 @end

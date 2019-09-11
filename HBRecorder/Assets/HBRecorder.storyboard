@@ -11,7 +11,7 @@
         <!--Video Player View Controller-->
         <scene sceneID="btL-1j-p1t">
             <objects>
-                <viewController storyboardIdentifier="HBVideoPlayerViewController" automaticallyAdjustsScrollViewInsets="NO" id="SVJ-NV-hvC" customClass="HBVideoPlayerViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HBVideoPlayerViewController" automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="flipHorizontal" modalPresentationStyle="fullScreen" id="SVJ-NV-hvC" customClass="HBVideoPlayerViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PNq-kO-Gwo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -162,7 +162,7 @@
         <!--EditVideoView Controller-->
         <scene sceneID="0yt-Ak-Obo">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="qPh-SG-s5E" userLabel="EditVideoView Controller" customClass="HBEditVideoViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="overFullScreen" id="qPh-SG-s5E" userLabel="EditVideoView Controller" customClass="HBEditVideoViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TfA-Rr-uxo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -293,7 +293,7 @@
         <!-- -->
         <scene sceneID="joE-2y-B3d">
             <objects>
-                <viewController storyboardIdentifier="HBRecorder" id="ifV-zS-Wk8" customClass="HBRecorder" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HBRecorder" modalPresentationStyle="overFullScreen" id="ifV-zS-Wk8" customClass="HBRecorder" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SlW-dr-yok">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -481,7 +481,7 @@
                         <outlet property="recBtn" destination="Jne-ZN-4Dp" id="qFV-zS-qug"/>
                         <outlet property="stopButton" destination="iZu-BV-M12" id="0vU-Yx-A5t"/>
                         <outlet property="widthButtonConstraint" destination="pqU-MZ-OrN" id="6I8-RW-nxz"/>
-                        <segue destination="SVJ-NV-hvC" kind="show" identifier="Video" id="mLx-dl-24o"/>
+                        <segue destination="SVJ-NV-hvC" kind="presentation" identifier="Video" id="mLx-dl-24o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZHD-As-ZwZ" sceneMemberID="firstResponder"/>
