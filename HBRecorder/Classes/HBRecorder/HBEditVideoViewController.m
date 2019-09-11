@@ -29,6 +29,11 @@
     self.videoPlayerView.player.externalPlaybackVideoGravity = AVLayerVideoGravityResizeAspectFill;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+}
+
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
