@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.navigationController.navigationBarHidden = YES;
     self.videoPlayerView.tapToPauseEnabled = NO;
     self.videoPlayerView.player.loopEnabled = YES;
     self.videoPlayerView.delegate = self;

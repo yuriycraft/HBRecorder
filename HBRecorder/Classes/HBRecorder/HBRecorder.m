@@ -174,6 +174,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
     SCRecordSession *recordSession = _recorder.session;
 
                      if (recordSession != nil) {
@@ -587,11 +588,14 @@
 }
 
 - (IBAction)shutterButtonActionEnd:(id)sender {
+    
     self.heightButtonConstraint.constant = 70.f;
     self.widthButtonConstraint.constant = 70.f;
+    if (_recorder.isRecording) {
      [_recorder pause:^{
           [self saveAndShowSession:_recorder.session];
       }];
+    }
      self.circleProgressView.hidden = YES;
     self.outerImageView.hidden = NO;
            // change UI
@@ -620,6 +624,7 @@
         self.openToolsButton.frame = openToolsButtonFrame;
     }];
 }
+
 - (IBAction)closeCameraTapped:(id)sender {
     [self.delegate recorderDidCancel:self];
     
