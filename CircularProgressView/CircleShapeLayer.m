@@ -40,14 +40,14 @@
     
     self.path = [self drawPathWithArcCenter];
     self.fillColor = [UIColor clearColor].CGColor;
-    self.strokeColor = [UIColor colorWithRed:0.86f green:0.86f blue:0.86f alpha:0.4f].CGColor;
-    self.lineWidth = 20;
+    self.strokeColor = [UIColor whiteColor].CGColor;
+    self.lineWidth = 10;
     
     self.progressLayer = [CAShapeLayer layer];
     self.progressLayer.path = [self drawPathWithArcCenter];
     self.progressLayer.fillColor = [UIColor clearColor].CGColor;
     self.progressLayer.strokeColor = [UIColor whiteColor].CGColor;
-    self.progressLayer.lineWidth = 20;
+    self.progressLayer.lineWidth = 10;
     self.progressLayer.lineCap = kCALineCapRound;
     self.progressLayer.lineJoin = kCALineJoinRound;
     [self addSublayer:self.progressLayer];

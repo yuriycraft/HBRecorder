@@ -23,9 +23,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.videoPlayerView.tapToPauseEnabled = YES;
+    self.videoPlayerView.tapToPauseEnabled = NO;
     self.videoPlayerView.player.loopEnabled = YES;
     self.videoPlayerView.delegate = self;
+    self.videoPlayerView.player.externalPlaybackVideoGravity = AVLayerVideoGravityResizeAspectFill;
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -69,7 +70,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-//    self.navigationController.navigationBar.hidden = YES;
+    self.navigationController.navigationBar.hidden = YES;
     
     _scrollView.frame = CGRectMake(_scrollView.frame.origin.x, _scrollView.frame.origin.y, _scrollView.frame.size.width , 110);
     
@@ -78,7 +79,7 @@
     
     for (SCRecordSessionSegment *segment in self.recordSession.segments) {
         UIImageView *imageView = [[UIImageView alloc] init];
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        imageView.contentMode = UIViewContentModeScaleToFill;
         imageView.image = segment.thumbnail;
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchedVideo:)];
         imageView.userInteractionEnabled = YES;

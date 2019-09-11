@@ -254,7 +254,7 @@
 				ORGANIZATIONNAME = HilalB;
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
-						DevelopmentTeam = 438NU44SLU;
+						DevelopmentTeam = HW7523VV43;
 					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
@@ -609,13 +609,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = 438NU44SLU;
+				DEVELOPMENT_TEAM = HW7523VV43;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HBRecorder/HBRecorder-Prefix.pch";
 				INFOPLIST_FILE = "HBRecorder/HBRecorder-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.HBRecorder-Examples";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.HBRecorder-Examplesdd";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -628,13 +628,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = 438NU44SLU;
+				DEVELOPMENT_TEAM = HW7523VV43;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HBRecorder/HBRecorder-Prefix.pch";
 				INFOPLIST_FILE = "HBRecorder/HBRecorder-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.HBRecorder-Examples";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.HBRecorder-Examplesdd";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;

@@ -137,6 +137,7 @@
     self.outerImageView.image = self.outerImage1;
     
 }
+
 -(UIImage*)imageNamed:(NSString*)imgName {
     
     NSBundle *bundle = [NSBundle bundleForClass:HBRecorder.class];
@@ -404,6 +405,9 @@
     
     self.timeRecordedLabel.text = [NSString stringWithFormat:@"%.2f sec", CMTimeGetSeconds(currentTime)];
     [self.circleProgressView setElapsedTime: CMTimeGetSeconds(currentTime)];
+    self.circleProgressView.tintColor = [UIColor colorWithRed:239/255.
+                    green:31/255.
+                     blue:147/255. alpha:1.0];
 }
 
 - (void)recorder:(SCRecorder *)recorder didAppendVideoSampleBufferInSession:(SCRecordSession *)recordSession {
@@ -565,6 +569,7 @@
           self.heightButtonConstraint.constant = 120.f;
           self.widthButtonConstraint.constant = 120.f;
           self.circleProgressView.hidden = NO;
+          self.outerImageView.hidden = YES;
       }
       // REC STOP
       else {
@@ -582,12 +587,13 @@
 }
 
 - (IBAction)shutterButtonActionEnd:(id)sender {
+    self.heightButtonConstraint.constant = 70.f;
+    self.widthButtonConstraint.constant = 70.f;
      [_recorder pause:^{
-         self.heightButtonConstraint.constant = 70.f;
-         self.widthButtonConstraint.constant = 70.f;
           [self saveAndShowSession:_recorder.session];
       }];
      self.circleProgressView.hidden = YES;
+    self.outerImageView.hidden = NO;
            // change UI
            [self.recBtn setImage:self.recStartImage
                         forState:UIControlStateNormal];
