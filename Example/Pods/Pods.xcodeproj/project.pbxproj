@@ -106,9 +106,9 @@
 		F54D9985DAFC11CFF378F1C0257F4AA3 /* SCRecorder-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 74BB7986CD7BC99F1C84D04DB5EE6F89 /* SCRecorder-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F70F8DACD57DCDCA5A6F104CC3A71939 /* Pods-HBRecorder_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4FF5012AB19A99709EC24E8B7344451 /* Pods-HBRecorder_Tests-dummy.m */; };
 		FA276CD7274C2B5B9181E820F98D69EF /* NSURL+SCSaveToCameraRoll.h in Headers */ = {isa = PBXBuildFile; fileRef = 29470BB5B1A3567FEDCCFF5DFA5E3157 /* NSURL+SCSaveToCameraRoll.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FD6D77A92327ED3F00855BD0 /* CircleProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = FD6D77A52327ED3E00855BD0 /* CircleProgressView.h */; };
+		FD6D77A92327ED3F00855BD0 /* CircleProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = FD6D77A52327ED3E00855BD0 /* CircleProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FD6D77AA2327ED3F00855BD0 /* CircleShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6D77A62327ED3E00855BD0 /* CircleShapeLayer.m */; };
-		FD6D77AC2327ED3F00855BD0 /* CircleShapeLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = FD6D77A72327ED3E00855BD0 /* CircleShapeLayer.h */; };
+		FD6D77AC2327ED3F00855BD0 /* CircleShapeLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = FD6D77A72327ED3E00855BD0 /* CircleShapeLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FD6D77AD2327ED3F00855BD0 /* CircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6D77A82327ED3E00855BD0 /* CircleProgressView.m */; };
 		FE99F5B43FA7DCF0CDF2EEDF24CE09E1 /* SCProcessingQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 39D4B9BED4560F725CC6AB13C98EE698 /* SCProcessingQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -617,17 +617,17 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD6D77AC2327ED3F00855BD0 /* CircleShapeLayer.h in Headers */,
+				FD6D77A92327ED3F00855BD0 /* CircleProgressView.h in Headers */,
 				586FB234510240FB4134169A09DFCFD8 /* HBEditVideoViewController.h in Headers */,
 				ECA82143E0BED6592234F6A2FBA31218 /* HBRecorder-umbrella.h in Headers */,
 				BFC0530E9A8E51FFFB1C17FC5BFAA1C0 /* HBRecorder.h in Headers */,
 				5EB1124EA3430AF2953C77921AB3A39B /* HBTransition.h in Headers */,
-				FD6D77A92327ED3F00855BD0 /* CircleProgressView.h in Headers */,
 				397E18F689FBBE6684DCCCBBD05AC168 /* HBVideoPlayerViewController.h in Headers */,
 				D16F9CF83688B18D259728FEB888421A /* SCImageDisplayerViewController.h in Headers */,
 				5E779356D12D2ED92BB8A5AF9285F01C /* SCRecordSessionManager.h in Headers */,
 				3430497FD2493ADDA129AE52B64F8E27 /* SCSessionListViewController.h in Headers */,
 				E1C80EB9281B993BFD8868A012CC48B4 /* SCSessionTableViewCell.h in Headers */,
-				FD6D77AC2327ED3F00855BD0 /* CircleShapeLayer.h in Headers */,
 				52626ABF6814029E7BBB238A16C767A8 /* SCTouchDetector.h in Headers */,
 				CD8C6EE98F4AE06FF4E93E173B3FCE68 /* SCWatermarkOverlayView.h in Headers */,
 			);
