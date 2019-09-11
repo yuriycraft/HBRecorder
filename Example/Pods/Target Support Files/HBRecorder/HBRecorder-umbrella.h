@@ -21,6 +21,7 @@
 #import "SCTouchDetector.h"
 #import "SCWatermarkOverlayView.h"
 
+
 FOUNDATION_EXPORT double HBRecorderVersionNumber;
 FOUNDATION_EXPORT const unsigned char HBRecorderVersionString[];
 
