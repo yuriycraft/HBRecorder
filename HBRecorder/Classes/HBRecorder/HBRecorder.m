@@ -37,6 +37,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightButtonConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthButtonConstraint;
 @property (weak, nonatomic) IBOutlet CircleProgressView *circleProgressView;
+@property (weak, nonatomic) IBOutlet UILabel *descLabel;
+
 
 @end
 
@@ -64,8 +66,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.descLabel.text = self.descriptionText;
     [self.navigationController setNavigationBarHidden:YES];
-    self.capturePhotoButton.alpha = 0.0;
+  
     
     _ghostImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     _ghostImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -82,19 +85,14 @@
         _recorder.maxRecordDuration = CMTimeMake(_maxRecordDuration, 1);
     }
     
-//    _recorder.fastRecordMethodEnabled = YES;
-    
     _recorder.delegate = self;
     _recorder.autoSetVideoOrientation = YES; //YES causes bad orientation for video from camera roll
     
     UIView *previewView = self.previewView;
     _recorder.previewView = previewView;
     
-    [self.retakeButton addTarget:self action:@selector(handleRetakeButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self.stopButton addTarget:self action:@selector(handleStopButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-	[self.reverseCamera addTarget:self action:@selector(handleReverseCameraTapped:) forControlEvents:UIControlEventTouchUpInside];
     
-//    [self.recordView addGestureRecognizer:[[SCTouchDetector alloc] initWithTarget:self action:@selector(handleTouchDetected:)]];
     self.loadingView.hidden = YES;
     
     self.focusView = [[SCRecorderToolsView alloc] initWithFrame:previewView.bounds];
@@ -109,12 +107,6 @@
     NSError *error;
     if (![_recorder prepare:&error]) {
         NSLog(@"Prepare error: %@", error.localizedDescription);
-    }
-    
-    if (_recorder.deviceHasFlash) {
-        _flashModeButton.hidden = NO;
-    } else {
-        _flashModeButton.hidden = YES;
     }
     
 
@@ -218,6 +210,8 @@
         HBVideoPlayerViewController *videoPlayer = segue.destinationViewController;
         videoPlayer.recordSession = _recordSession;
         videoPlayer.parent = self;
+        videoPlayer.sendLabel.text = self.sendText;
+        videoPlayer.retakeLabel.text = self.retakeText;
     } else if ([segue.destinationViewController isKindOfClass:[SCImageDisplayerViewController class]]) {
         SCImageDisplayerViewController *imageDisplayer = segue.destinationViewController;
         imageDisplayer.photo = _photo;
@@ -286,26 +280,17 @@
 - (IBAction)switchCameraMode:(id)sender {
     if ([_recorder.captureSessionPreset isEqualToString:AVCaptureSessionPresetPhoto]) {
         [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self.capturePhotoButton.alpha = 0.0;
-            self.recordView.alpha = 1.0;
-            self.retakeButton.alpha = 1.0;
             self.stopButton.alpha = 1.0;
         } completion:^(BOOL finished) {
 			_recorder.captureSessionPreset = kVideoPreset;
-            [self.switchCameraModeButton setTitle:@"Switch Photo" forState:UIControlStateNormal];
-            [self.flashModeButton setTitle:@"Flash : Off" forState:UIControlStateNormal];
+          
             _recorder.flashMode = SCFlashModeOff;
         }];
     } else {
         [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self.recordView.alpha = 0.0;
-            self.retakeButton.alpha = 0.0;
-            self.stopButton.alpha = 0.0;
-            self.capturePhotoButton.alpha = 1.0;
+        
         } completion:^(BOOL finished) {
 			_recorder.captureSessionPreset = AVCaptureSessionPresetPhoto;
-            [self.switchCameraModeButton setTitle:@"Switch Video" forState:UIControlStateNormal];
-            [self.flashModeButton setTitle:@"Flash : Auto" forState:UIControlStateNormal];
             _recorder.flashMode = SCFlashModeAuto;
         }];
     }
@@ -403,8 +388,7 @@
     if (_recorder.session != nil) {
         currentTime = _recorder.session.duration;
     }
-    
-    self.timeRecordedLabel.text = [NSString stringWithFormat:@"%.2f sec", CMTimeGetSeconds(currentTime)];
+
     [self.circleProgressView setElapsedTime: CMTimeGetSeconds(currentTime)];
     self.circleProgressView.tintColor = [UIColor colorWithRed:239/255.
                     green:31/255.
@@ -439,10 +423,12 @@
     if (touchDetector.state == UIGestureRecognizerStateBegan) {
         _ghostImageView.hidden = YES;
         [_recorder record];
+        self.descLabel.hidden = YES;
         self.heightButtonConstraint.constant = 120.f;
         self.widthButtonConstraint.constant = 120.f;
     } else if (touchDetector.state == UIGestureRecognizerStateEnded) {
                     [_recorder pause:^{
+                        self.descLabel.hidden = NO;
                         self.heightButtonConstraint.constant = 70.f;
                         self.widthButtonConstraint.constant = 70.f;
             [self saveAndShowSession:_recorder.session];
@@ -463,29 +449,17 @@
 - (void)updateGhostImage {
     UIImage *image = nil;
     
-    if (_ghostModeButton.selected) {
-        if (_recorder.session.segments.count > 0) {
-            SCRecordSessionSegment *segment = [_recorder.session.segments lastObject];
-            image = segment.lastImage;
-        }
-    }
 
     
     _ghostImageView.image = image;
 //    _ghostImageView.image = [_recorder snapshotOfLastAppendedVideoBuffer];
-    _ghostImageView.hidden = !_ghostModeButton.selected;
+  
 }
 
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
 
-- (IBAction)switchGhostMode:(id)sender {
-    _ghostModeButton.selected = !_ghostModeButton.selected;
-    _ghostImageView.hidden = !_ghostModeButton.selected;
-    
-    [self updateGhostImage];
-}
 
 
 - (BOOL)shouldAutorotate{
@@ -528,13 +502,16 @@
                      forState:UIControlStateNormal];
         
          [_recorder record];
+        self.descLabel.hidden = YES;
         self.heightButtonConstraint.constant = 120.f;
         self.widthButtonConstraint.constant = 120.f;
+        
     }
     // REC STOP
     else {
     
                     [_recorder pause:^{
+                        self.descLabel.hidden = NO;
                         self.heightButtonConstraint.constant = 70.f;
                         self.widthButtonConstraint.constant = 70.f;
             [self saveAndShowSession:_recorder.session];
@@ -558,7 +535,6 @@
       // REC START
       
       if (!_recorder.isRecording) {
-       self.circleProgressView.status = NSLocalizedString(@"circle-progress-view.status-not-started", nil);
          self.circleProgressView.timeLimit = 10.f;
          self.circleProgressView.elapsedTime = 0;
          
@@ -567,6 +543,7 @@
                        forState:UIControlStateNormal];
           
            [_recorder record];
+          self.descLabel.hidden = YES;
           self.heightButtonConstraint.constant = 120.f;
           self.widthButtonConstraint.constant = 120.f;
           self.circleProgressView.hidden = NO;
@@ -574,21 +551,13 @@
       }
       // REC STOP
       else {
-//
-//             [_recorder pause:^{
-//                 self.heightButtonConstraint.constant = 70.f;
-//                 self.widthButtonConstraint.constant = 70.f;
-//     [self saveAndShowSession:_recorder.session];
-// }];
-//          // change UI
- //         [self.recBtn setImage:self.recStartImage
- //                      forState:UIControlStateNormal];
+
       }
 
 }
 
 - (IBAction)shutterButtonActionEnd:(id)sender {
-    
+    self.descLabel.hidden = NO;
     self.heightButtonConstraint.constant = 70.f;
     self.widthButtonConstraint.constant = 70.f;
     if (_recorder.isRecording) {
@@ -606,23 +575,7 @@
 
 
 - (IBAction)toolsButtonTapped:(UIButton *)sender {
-    CGRect toolsFrame = self.toolsContainerView.frame;
-    CGRect openToolsButtonFrame = self.openToolsButton.frame;
-    
-    if (toolsFrame.origin.y < 0) {
-        sender.selected = YES;
-        toolsFrame.origin.y = 0;
-        openToolsButtonFrame.origin.y = toolsFrame.size.height + 15;
-    } else {
-        sender.selected = NO;
-        toolsFrame.origin.y = -toolsFrame.size.height;
-        openToolsButtonFrame.origin.y = 15;
-    }
-    
-    [UIView animateWithDuration:0.15 animations:^{
-        self.toolsContainerView.frame = toolsFrame;
-        self.openToolsButton.frame = openToolsButtonFrame;
-    }];
+ 
 }
 
 - (IBAction)closeCameraTapped:(id)sender {
@@ -630,7 +583,6 @@
     
     self.navigationController.navigationBarHidden = NO;
     [self dismissViewControllerAnimated:YES completion:nil];
-   // [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

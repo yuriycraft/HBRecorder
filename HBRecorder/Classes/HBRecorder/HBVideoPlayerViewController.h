@@ -25,5 +25,7 @@
 
 - (IBAction)backToRecorder:(id)sender;
 - (IBAction)btnSaveTapped:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *retakeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sendLabel;
 
 @end
