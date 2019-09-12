@@ -197,10 +197,10 @@
         } else if (error == nil) {
             //[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
             
-            [_parent.delegate recorder:_parent didFinishPickingMediaWithUrl:exportSession.outputUrl];
+            [self->_parent.delegate recorder:self->_parent didFinishPickingMediaWithUrl:exportSession.outputUrl];
             
             
-            int viewsToPop = 2;
+       //     int viewsToPop = 2;
             self.navigationController.navigationBarHidden = NO;
             [self dismissViewControllerAnimated:YES completion:^{
                 

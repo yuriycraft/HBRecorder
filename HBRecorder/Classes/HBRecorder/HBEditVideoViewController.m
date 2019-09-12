@@ -219,11 +219,9 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     NSURL *url = info[UIImagePickerControllerMediaURL];
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    
     SCRecordSessionSegment *segment = [SCRecordSessionSegment segmentWithURL:url info:nil];
-    
     [_recordSession addSegment:segment];
+     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

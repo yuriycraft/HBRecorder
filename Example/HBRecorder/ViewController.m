@@ -125,7 +125,8 @@
     
     
     recorder.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self.navigationController pushViewController:recorder animated:YES];
+  //  [self.navigationController pushViewController:recorder animated:YES];
+    [self presentViewController:recorder animated:YES completion:nil];
     
     
     
