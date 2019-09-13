@@ -18,7 +18,8 @@
 @property (weak, nonatomic) IBOutlet UIView *progressView;
 
 @property (strong, nonatomic) HBRecorder *parent;
-
+@property (strong, nonatomic) NSString* retakeText;
+@property (strong, nonatomic) NSString* sendText;
 @property (strong, nonatomic) IBOutlet UILabel *recordTime;
 
 @property (strong, nonatomic) IBOutlet SCVideoPlayerView *playerView;

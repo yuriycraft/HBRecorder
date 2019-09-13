@@ -53,7 +53,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     self.exportView.clipsToBounds = YES;
     self.exportView.layer.cornerRadius = 20;
 
@@ -84,6 +83,15 @@
     
     [_playerView.player setItemByAsset:_recordSession.assetRepresentingSegments];
 	[_playerView.player play];
+    self.sendLabel.text = self.sendText;
+    self.retakeLabel.text = self.retakeText;
+
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.sendLabel.text = self.sendText;
+     self.retakeLabel.text = self.retakeText;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -94,6 +102,7 @@
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
     if ([segue.destinationViewController isKindOfClass:[HBEditVideoViewController class]]) {
         HBEditVideoViewController *editVideo = segue.destinationViewController;
         editVideo.recordSession = self.recordSession;

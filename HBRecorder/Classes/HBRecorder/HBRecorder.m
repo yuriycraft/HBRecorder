@@ -53,7 +53,7 @@
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_7_0
 
 - (UIStatusBarStyle) preferredStatusBarStyle {
-	return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleLightContent;
 }
 
 #endif
@@ -68,7 +68,7 @@
     [super viewDidLoad];
     self.descLabel.text = self.descriptionText;
     [self.navigationController setNavigationBarHidden:YES];
-  
+    
     
     _ghostImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     _ghostImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -77,7 +77,7 @@
     _ghostImageView.hidden = YES;
     
     [self.view insertSubview:_ghostImageView aboveSubview:self.previewView];
-
+    
     _recorder = [SCRecorder recorder];
     _recorder.captureSessionPreset = [SCRecorderTools bestCaptureSessionPresetCompatibleWithAllDevices];
     
@@ -101,7 +101,7 @@
     [previewView addSubview:self.focusView];
     
     self.focusView.outsideFocusTargetImage = [self imageNamed:@"focus"];
-
+    
     _recorder.initializeSessionLazily = NO;
     
     NSError *error;
@@ -109,7 +109,7 @@
         NSLog(@"Prepare error: %@", error.localizedDescription);
     }
     
-
+    
     // Setup images for the Shutter Button
     UIImage *image;
     image = [self imageNamed:@"ShutterButtonStart"];
@@ -119,7 +119,7 @@
     
     image = [self imageNamed:@"ShutterButtonStop"];
     self.recStopImage = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-
+    
     [self.recBtn setTintColor:[UIColor colorWithRed:239/255.
                                               green:31/255.
                                                blue:147/255.
@@ -135,7 +135,7 @@
     NSBundle *bundle = [NSBundle bundleForClass:HBRecorder.class];
     
     return [UIImage imageNamed:imgName inBundle:bundle compatibleWithTraitCollection:nil];
-
+    
 }
 
 - (void)recorder:(SCRecorder *)recorder didSkipVideoSampleBufferInSession:(SCRecordSession *)recordSession {
@@ -155,7 +155,7 @@
     
     [self prepareSession];
     
-	self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)viewDidLayoutSubviews {
@@ -168,23 +168,23 @@
     [super viewDidAppear:animated];
     self.navigationController.navigationBarHidden = YES;
     SCRecordSession *recordSession = _recorder.session;
-
-                     if (recordSession != nil) {
-                         _recorder.session = nil;
-                                                              
-                         if ([[SCRecordSessionManager sharedInstance] isSaved:recordSession]) {
-                             [recordSession endSegmentWithInfo:nil completionHandler:nil];
-                         } else {
-                             [recordSession cancelSession:nil];
-                         }
-                             [self prepareSession];
-                     }
+    
+    if (recordSession != nil) {
+        _recorder.session = nil;
+        
+        if ([[SCRecordSessionManager sharedInstance] isSaved:recordSession]) {
+            [recordSession endSegmentWithInfo:nil completionHandler:nil];
+        } else {
+            [recordSession cancelSession:nil];
+        }
+        [self prepareSession];
+    }
     [_recorder startRunning];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-
+    
     [_recorder stopRunning];
 }
 
@@ -197,8 +197,14 @@
 #pragma mark - Handle
 
 - (void)showAlertViewWithTitle:(NSString*)title message:(NSString*) message {
-    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-    [alertView show];
+    UIAlertController* openProfileController = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle: UIAlertControllerStyleAlert];
+    UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+                               {
+    }];
+    
+    [openProfileController addAction:okAction];
+    
+    [self presentViewController:openProfileController animated:YES completion:nil];
 }
 
 - (void)showVideo {
@@ -210,8 +216,8 @@
         HBVideoPlayerViewController *videoPlayer = segue.destinationViewController;
         videoPlayer.recordSession = _recordSession;
         videoPlayer.parent = self;
-        videoPlayer.sendLabel.text = self.sendText;
-        videoPlayer.retakeLabel.text = self.retakeText;
+        videoPlayer.sendText = self.sendText;
+        videoPlayer.retakeText = self.retakeText;
     } else if ([segue.destinationViewController isKindOfClass:[SCImageDisplayerViewController class]]) {
         SCImageDisplayerViewController *imageDisplayer = segue.destinationViewController;
         imageDisplayer.photo = _photo;
@@ -229,7 +235,7 @@
 }
 
 - (void) handleReverseCameraTapped:(id)sender {
-	[_recorder switchCaptureDevices];
+    [_recorder switchCaptureDevices];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -244,18 +250,14 @@
     
     [self showVideo];
 }
+
 - (void) handleStopButtonTapped:(id)sender {
-//    [_recorder pause:^{
-//        self.heightButtonConstraint.constant = 70.f;
-//        self.widthButtonConstraint.constant = 70.f;
-//        [self saveAndShowSession:_recorder.session];
-//    }];
     [_recorder switchCaptureDevices];
 }
 
 - (void)saveAndShowSession:(SCRecordSession *)recordSession {
     [[SCRecordSessionManager sharedInstance] saveRecordSession:recordSession];
-        
+    
     _recordSession = recordSession;
     [self showVideo];
 }
@@ -274,7 +276,7 @@
         }
     }
     
-	[self prepareSession];
+    [self prepareSession];
 }
 
 - (IBAction)switchCameraMode:(id)sender {
@@ -282,16 +284,16 @@
         [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.stopButton.alpha = 1.0;
         } completion:^(BOOL finished) {
-			_recorder.captureSessionPreset = kVideoPreset;
-          
-            _recorder.flashMode = SCFlashModeOff;
+            self->_recorder.captureSessionPreset = kVideoPreset;
+            
+            self->_recorder.flashMode = SCFlashModeOff;
         }];
     } else {
         [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        
+            
         } completion:^(BOOL finished) {
-			_recorder.captureSessionPreset = AVCaptureSessionPresetPhoto;
-            _recorder.flashMode = SCFlashModeAuto;
+            _recorder.captureSessionPreset = AVCaptureSessionPresetPhoto;
+            self->_recorder.flashMode = SCFlashModeAuto;
         }];
     }
 }
@@ -334,7 +336,7 @@
         }
     }
     
-//    [self.flashModeButton setTitle:flashModeString forState:UIControlStateNormal];
+    //    [self.flashModeButton setTitle:flashModeString forState:UIControlStateNormal];
     
     
 }
@@ -388,11 +390,11 @@
     if (_recorder.session != nil) {
         currentTime = _recorder.session.duration;
     }
-
+    
     [self.circleProgressView setElapsedTime: CMTimeGetSeconds(currentTime)];
     self.circleProgressView.tintColor = [UIColor colorWithRed:239/255.
-                    green:31/255.
-                     blue:147/255. alpha:1.0];
+                                                        green:31/255.
+                                                         blue:147/255. alpha:1.0];
 }
 
 - (void)recorder:(SCRecorder *)recorder didAppendVideoSampleBufferInSession:(SCRecordSession *)recordSession {
@@ -407,9 +409,9 @@
         CMTime suggestedMaxSegmentDuration = CMTimeMake(_maxSegmentDuration, 1);
         if (CMTIME_IS_VALID(suggestedMaxSegmentDuration)) {
             if (CMTIME_COMPARE_INLINE(recorder.session.currentSegmentDuration, >=, suggestedMaxSegmentDuration)) {
-                            [_recorder pause:^{
-                                self.heightButtonConstraint.constant = 70.f;
-                                self.widthButtonConstraint.constant = 70.f;
+                [_recorder pause:^{
+                    self.heightButtonConstraint.constant = 70.f;
+                    self.widthButtonConstraint.constant = 70.f;
                     [self saveAndShowSession:_recorder.session];
                 }];
                 [self.recBtn setImage:self.recStartImage forState:UIControlStateNormal];
@@ -427,10 +429,10 @@
         self.heightButtonConstraint.constant = 120.f;
         self.widthButtonConstraint.constant = 120.f;
     } else if (touchDetector.state == UIGestureRecognizerStateEnded) {
-                    [_recorder pause:^{
-                        self.descLabel.hidden = NO;
-                        self.heightButtonConstraint.constant = 70.f;
-                        self.widthButtonConstraint.constant = 70.f;
+        [_recorder pause:^{
+            self.descLabel.hidden = NO;
+            self.heightButtonConstraint.constant = 70.f;
+            self.widthButtonConstraint.constant = 70.f;
             [self saveAndShowSession:_recorder.session];
         }];
     }
@@ -449,11 +451,11 @@
 - (void)updateGhostImage {
     UIImage *image = nil;
     
-
+    
     
     _ghostImageView.image = image;
-//    _ghostImageView.image = [_recorder snapshotOfLastAppendedVideoBuffer];
-  
+    //    _ghostImageView.image = [_recorder snapshotOfLastAppendedVideoBuffer];
+    
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -501,7 +503,7 @@
         [self.recBtn setImage:self.recStopImage
                      forState:UIControlStateNormal];
         
-         [_recorder record];
+        [_recorder record];
         self.descLabel.hidden = YES;
         self.heightButtonConstraint.constant = 120.f;
         self.widthButtonConstraint.constant = 120.f;
@@ -509,51 +511,51 @@
     }
     // REC STOP
     else {
-    
-                    [_recorder pause:^{
-                        self.descLabel.hidden = NO;
-                        self.heightButtonConstraint.constant = 70.f;
-                        self.widthButtonConstraint.constant = 70.f;
+        
+        [_recorder pause:^{
+            self.descLabel.hidden = NO;
+            self.heightButtonConstraint.constant = 70.f;
+            self.widthButtonConstraint.constant = 70.f;
             [self saveAndShowSession:_recorder.session];
         }];
         // change UI
         [self.recBtn setImage:self.recStartImage
                      forState:UIControlStateNormal];
     }
-
+    
 }
 
 - (IBAction)shutterButtonActionStart:(id)sender {
     if (!hasOrientaionLocked) {
-          _recorder.autoSetVideoOrientation = NO;
-          hasOrientaionLocked = YES;
-          UIInterfaceOrientation currentOrientation = [UIApplication sharedApplication].statusBarOrientation;
-          [[UIDevice currentDevice] setValue:[NSNumber numberWithInt:currentOrientation] forKey:@"orientation"];
-      }
-      
-      
-      // REC START
-      
-      if (!_recorder.isRecording) {
-         self.circleProgressView.timeLimit = 10.f;
-         self.circleProgressView.elapsedTime = 0;
-         
-          // change UI
-          [self.recBtn setImage:self.recStopImage
-                       forState:UIControlStateNormal];
-          
-           [_recorder record];
-          self.descLabel.hidden = YES;
-          self.heightButtonConstraint.constant = 120.f;
-          self.widthButtonConstraint.constant = 120.f;
-          self.circleProgressView.hidden = NO;
-          self.outerImageView.hidden = YES;
-      }
-      // REC STOP
-      else {
-
-      }
-
+        _recorder.autoSetVideoOrientation = NO;
+        hasOrientaionLocked = YES;
+        UIInterfaceOrientation currentOrientation = [UIApplication sharedApplication].statusBarOrientation;
+        [[UIDevice currentDevice] setValue:[NSNumber numberWithInt:currentOrientation] forKey:@"orientation"];
+    }
+    
+    
+    // REC START
+    
+    if (!_recorder.isRecording) {
+        self.circleProgressView.timeLimit = 10.f;
+        self.circleProgressView.elapsedTime = 0;
+        
+        // change UI
+        [self.recBtn setImage:self.recStopImage
+                     forState:UIControlStateNormal];
+        
+        [_recorder record];
+        self.descLabel.hidden = YES;
+        self.heightButtonConstraint.constant = 120.f;
+        self.widthButtonConstraint.constant = 120.f;
+        self.circleProgressView.hidden = NO;
+        self.outerImageView.hidden = YES;
+    }
+    // REC STOP
+    else {
+        
+    }
+    
 }
 
 - (IBAction)shutterButtonActionEnd:(id)sender {
@@ -561,21 +563,21 @@
     self.heightButtonConstraint.constant = 70.f;
     self.widthButtonConstraint.constant = 70.f;
     if (_recorder.isRecording) {
-     [_recorder pause:^{
-          [self saveAndShowSession:_recorder.session];
-      }];
+        [_recorder pause:^{
+            [self saveAndShowSession:_recorder.session];
+        }];
     }
-     self.circleProgressView.hidden = YES;
+    self.circleProgressView.hidden = YES;
     self.outerImageView.hidden = NO;
-           // change UI
-           [self.recBtn setImage:self.recStartImage
-                        forState:UIControlStateNormal];
+    // change UI
+    [self.recBtn setImage:self.recStartImage
+                 forState:UIControlStateNormal];
 }
 
 
 
 - (IBAction)toolsButtonTapped:(UIButton *)sender {
- 
+    
 }
 
 - (IBAction)closeCameraTapped:(id)sender {
